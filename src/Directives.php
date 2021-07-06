@@ -4,13 +4,6 @@ namespace duncan3dc\Laravel;
 
 use Illuminate\View\Compilers\BladeCompiler;
 
-use function assert;
-use function in_array;
-use function is_string;
-use function strlen;
-use function substr;
-use function trim;
-
 class Directives implements DirectivesInterface
 {
     /**
@@ -33,7 +26,6 @@ class Directives implements DirectivesInterface
      */
     private $js = "js";
 
-
     /**
      * Shorthand function to clone the current instance with a modified parameter.
      *
@@ -42,13 +34,11 @@ class Directives implements DirectivesInterface
      *
      * @return self The new modified instance
      */
-    private function clone(string $parameter, $value): self
-    {
+    function clone (string $parameter, $value): self {
         $directives = clone $this;
         $directives->$parameter = $value;
         return $directives;
     }
-
 
     /**
      * Get a new instance with the namespace directive applied.
@@ -60,7 +50,6 @@ class Directives implements DirectivesInterface
         return $this->clone("namespace", true);
     }
 
-
     /**
      * Get a new instance without the namespace directive applied.
      *
@@ -70,7 +59,6 @@ class Directives implements DirectivesInterface
     {
         return $this->clone("namespace", false);
     }
-
 
     /**
      * Get a new instance with the use directive applied.
@@ -82,7 +70,6 @@ class Directives implements DirectivesInterface
         return $this->clone("use", true);
     }
 
-
     /**
      * Get a new instance without the use directive applied.
      *
@@ -92,7 +79,6 @@ class Directives implements DirectivesInterface
     {
         return $this->clone("use", false);
     }
-
 
     /**
      * Get a new instance with the css directive applied.
@@ -106,7 +92,6 @@ class Directives implements DirectivesInterface
         return $this->clone("css", $path);
     }
 
-
     /**
      * Get a new instance without the css directive applied.
      *
@@ -116,7 +101,6 @@ class Directives implements DirectivesInterface
     {
         return $this->clone("css", null);
     }
-
 
     /**
      * Get a new instance with the javascript directive applied.
@@ -130,7 +114,6 @@ class Directives implements DirectivesInterface
         return $this->clone("js", $path);
     }
 
-
     /**
      * Get a new instance without the javascript directive applied.
      *
@@ -140,7 +123,6 @@ class Directives implements DirectivesInterface
     {
         return $this->clone("js", null);
     }
-
 
     /**
      * Register all the active directives to the blade templating compiler.
@@ -180,7 +162,6 @@ class Directives implements DirectivesInterface
         }
     }
 
-
     /**
      * Convert a simple name into a full asset path.
      *
@@ -209,7 +190,7 @@ class Directives implements DirectivesInterface
         if (substr($file, 0, 1) !== "/") {
             $path = trim($path, "/");
             if (strlen($path) > 0) {
-                $path = "/{$path}/";
+                $path = "{$path}/";
             } else {
                 $path = "/";
             }
